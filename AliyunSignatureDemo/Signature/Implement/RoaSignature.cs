@@ -15,6 +15,7 @@ namespace AliyunSignatureDemo.Signature.Implement
             AcceptType = "RAM";
             Version = "2015-12-15";
             Endpoint = "cs.aliyuncs.com";
+            HeaderSeparator = "\n";
         }
 
         public override string GetComposedUrl()

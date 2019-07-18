@@ -14,6 +14,7 @@ namespace AliyunSignatureDemo.Signature.Implement
             Version = "2014-08-15";
             Action = "DescribeRegions";
             Endpoint = "rds.aliyuncs.com";
+            HeaderSeparator = "&";
         }
 
         private void ComposeRpcQueries(IDictionary<string, string> queries)

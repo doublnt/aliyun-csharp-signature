@@ -9,9 +9,9 @@ namespace AliyunSignatureDemo.Signature.Implement
     {
         public string UrlPattern { get; set; }
 
-        public string HeaderSeparator { get; set; } = "&";
+        public string HeaderSeparator { get; set; }
 
-        public string QuerySeparator { get; set; } = "\n";
+        public string QuerySeparator { get; set; } = "&";
 
         public string Version { get; set; }
 
@@ -47,7 +47,7 @@ namespace AliyunSignatureDemo.Signature.Implement
             return Headers;
         }
 
-        public void ComposeHeader(IDictionary<string,string> header)
+        public void ComposeHeader(IDictionary<string, string> header)
         {
             header.Add("x-sdk-client", "Net/2.0.0");
             header.Add("x-sdk-invoke-type", "normal");

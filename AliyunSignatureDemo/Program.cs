@@ -1,5 +1,4 @@
-﻿using AliyunSignatureDemo.Signature;
-using AliyunSignatureDemo.Signature.Implement;
+﻿using AliyunSignatureDemo.Signature.Implement;
 
 namespace AliyunSignatureDemo
 {
@@ -8,7 +7,7 @@ namespace AliyunSignatureDemo
         public static void Main(string[] args)
         {
             RoaDemo();
-            //RpcDemo();
+            RpcDemo();
         }
 
         private static void RpcDemo()
