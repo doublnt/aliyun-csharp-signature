@@ -32,7 +32,7 @@ namespace AliyunSignatureDemo.Utils
                 .ToString(ISO8601_DATE_FORMAT, CultureInfo.CreateSpecificCulture("en-US"));
         }
 
-        public static string GetRFC2616Date(DateTime datetime)
+        public static string GetRfc2616Date(DateTime datetime)
         {
             return datetime.ToUniversalTime().GetDateTimeFormats('r')[0];
         }
@@ -77,43 +77,7 @@ namespace AliyunSignatureDemo.Utils
             return sb.ToString();
         }
 
-        public static string BuildQuerystring(string uri, IDictionary<string, string> queries, string querySeparator)
-        {
-            var uriParts = SplitSubResource(uri);
-            var sortMap = new Dictionary<string, string>(queries);
-            if (null != uriParts[1])
-            {
-                sortMap.Add(uriParts[1], null);
-            }
-
-            var queryBuilder = new StringBuilder(uriParts[0]);
-            var sortedDictionary = new SortedDictionary<string, string>(sortMap);
-            if (0 < sortedDictionary.Count)
-            {
-                queryBuilder.Append("?");
-            }
-
-            foreach (var e in sortedDictionary)
-            {
-                queryBuilder.Append(e.Key);
-                if (null != e.Value)
-                {
-                    queryBuilder.Append("=").Append(e.Value);
-                }
-
-                queryBuilder.Append(querySeparator);
-            }
-
-            var querystring = queryBuilder.ToString();
-            if (querystring.EndsWith(querySeparator))
-            {
-                querystring = querystring.Substring(0, querystring.Length - 1);
-            }
-
-            return querystring;
-        }
-
-        private static string[] SplitSubResource(string uri)
+        public static string[] SplitSubResource(string uri)
         {
             var queIndex = uri.IndexOf("?");
             var uriParts = new string[2];
@@ -128,43 +92,6 @@ namespace AliyunSignatureDemo.Utils
             }
 
             return uriParts;
-        }
-
-        public static string BuildCanonicalHeaders(IDictionary<string, string> headers, string headerBegin, string headerSeparator)
-        {
-            var sortMap = new Dictionary<string, string>();
-            foreach (var e in headers)
-            {
-                var key = e.Key.ToLower();
-                var val = e.Value;
-                if (key.StartsWith(headerBegin))
-                {
-                    sortMap.Add(key, val);
-                }
-            }
-
-            var sortedDictionary = new SortedDictionary<string, string>(sortMap);
-
-            var headerBuilder = new StringBuilder();
-            foreach (var e in sortedDictionary)
-            {
-                headerBuilder.Append(e.Key);
-                headerBuilder.Append(':').Append(e.Value);
-                headerBuilder.Append(headerSeparator);
-            }
-
-            return headerBuilder.ToString();
-        }
-
-        public static string ComposeUrl(string endpoint, IDictionary<string, string> queries)
-        {
-            var urlBuilder = new StringBuilder("");
-            urlBuilder.Append("http");
-            urlBuilder.Append("://").Append(endpoint);
-            if (-1 == urlBuilder.ToString().IndexOf("?")) urlBuilder.Append("/?");
-
-            var query = SignatureHelper.ConcatQueryString(queries);
-            return urlBuilder.Append(query).ToString();
         }
     }
 }

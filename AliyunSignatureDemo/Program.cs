@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
-
-using AliyunSignatureDemo.Roa;
-using AliyunSignatureDemo.Rpc;
+﻿using AliyunSignatureDemo.Signature;
+using AliyunSignatureDemo.Signature.Implement;
 
 namespace AliyunSignatureDemo
 {
@@ -14,20 +8,25 @@ namespace AliyunSignatureDemo
         public static void Main(string[] args)
         {
             RoaDemo();
+            //RpcDemo();
         }
 
         private static void RpcDemo()
         {
-            var url = RpcSignature.GetAssembleUri();
-            var header = RpcSignature.GetHeaders();
+            var signature = new RpcSignature();
+
+            var url = signature.GetComposedUrl();
+            var header = signature.GetHeader();
 
             HttpResponse.GetResponse(url, header);
         }
 
         private static void RoaDemo()
         {
-            var url = RoaSignature.GetFinalUrl();
-            var header = RoaSignature.GetHeader();
+            var signature = new RoaSignature();
+
+            var url = signature.GetComposedUrl();
+            var header = signature.GetHeader();
 
             HttpResponse.GetResponse(url, header);
         }

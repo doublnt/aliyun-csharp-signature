@@ -14,5 +14,20 @@ namespace AliyunSignatureDemo.Signer
                 return Convert.ToBase64String(hashValue);
             }
         }
+
+        public static string GetSignatureMethod()
+        {
+            return "HMAC-SHA1";
+        }
+
+        public static string GetSignatureVersion()
+        {
+            return "1.0";
+        }
+
+        public static string GetSignatureNonce()
+        {
+            return Guid.NewGuid().ToString();
+        }
     }
 }
